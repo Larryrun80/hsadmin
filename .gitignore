@@ -1,0 +1,23 @@
+# Cache and logs
+*.pyc
+.DS_Store
+
+# Config and Secrets
+instance/
+
+# Private project files
+
+# Assets and user uploads
+
+# Backup files
+*.swp
+*.bak
+
+# Test files
+
+# Temp logs
+logs/
+*.log
+
+# Distribution files
+distribute/
