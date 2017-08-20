@@ -9,7 +9,9 @@ ProjectDir = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir))
 print_log('Project Dir: {}'.format(ProjectDir))
 
-# Loading Configs
+# ###################
+# ## Loading Configs
+# ###################
 # Load config from '/config.py'
 if os.path.isfile('{}/config.py'.format(ProjectDir)):
     app.config.from_object('config')
@@ -30,3 +32,16 @@ else:
 app.config.from_pyfile('default.py')
 
 # print_log(app.config)
+
+# ###################
+# ## Enable Markdown
+# ###################
+from flaskext.markdown import Markdown
+Markdown(app)
+
+# ####################
+# ## Enable Blueprint
+# ####################
+from .views.home import home
+
+app.register_blueprint(home)
