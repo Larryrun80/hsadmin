@@ -30,7 +30,10 @@ else:
         'Skipped loading settings from "/instance/default.py": file not found')
 
 # Load config from envvar, make sense to add APP_CONFIG_FILE to env var
-app.config.from_envvar('APP_CONFIG_FILE')
+try:
+    app.config.from_envvar('APP_CONFIG_FILE')
+except:
+    print_log('The environment variable is not set and skip env var settings.')
 
 # print_log(app.config)
 
