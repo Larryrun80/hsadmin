@@ -15,3 +15,11 @@ And, thanks Robert Picard for writing <[Explore Flask](https://exploreflask.com/
 
 
 At last, we using PEP8 and PEP 257 to format our code.
+
+
+### How to start
+1. git clone to any folder you like;
+2. [optional] change the name of folder "project" to your project name if you like;
+3. [optional] if you did step 2, remind to modify the first line of run.py, change "project" to your project name, too. It should be the same as project folder name;
+4. modify "instance/default.py", change the SECRET_KEY and other settings if you like
+5. python run.py and enjoy
