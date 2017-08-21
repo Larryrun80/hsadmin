@@ -12,5 +12,5 @@
 # /instance/default.py will overload this config file
 # envvar settings will overload /instance/default.py
 
-DEBUG = True  # disable Flask debug mode
+DEBUG = False  # disable Flask debug mode
 BCRYPT_LEVEL = 13  # config Flask-Bcrypt
