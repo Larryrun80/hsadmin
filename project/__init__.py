@@ -37,6 +37,40 @@ except:
 
 # print_log(app.config)
 
+# #############################
+# ## Enable SQLAlchemy Support
+# #############################
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy(app)
+
+
+# ###############################
+# ## Enable Flask-Admin Support
+# ###############################
+from flask.ext.admin import Admin
+admin = Admin(app, name='MyToken Backend', template_mode='bootstrap3')
+
+from flask_basicauth import BasicAuth
+basic_auth = BasicAuth(app)
+
+from flask_admin.contrib.sqla import ModelView
+from .models.social import Social, SocialView
+from .models.currency import Currency, CurrencyView
+from .models.ico import Ico, IcoView
+from .models.announcement import Announcement, AnnouncementView
+from .models.news import News, NewsView
+from .models.market import Market, MarketView
+from .models.top_market import TopMarket, TopMarketView
+
+admin.add_view(CurrencyView(Currency, db.session, name='数字货币'))
+admin.add_view(IcoView(Ico, db.session, name='ICO信息'))
+admin.add_view(SocialView(Social, db.session, name='社交／推特'))
+admin.add_view(AnnouncementView(Announcement, db.session, name='公告'))
+admin.add_view(NewsView(News, db.session, name='早知道'))
+admin.add_view(MarketView(Market, db.session, name='交易所'))
+admin.add_view(TopMarketView(TopMarket, db.session, name='App交易所'))
+
+
 # ###################
 # ## Enable Markdown
 # ###################
