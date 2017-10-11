@@ -16,6 +16,7 @@ class News(db.Model):
     source = db.Column(db.String(200))
     author = db.Column(db.String(50))
     photo_abstract = db.Column(db.String(255))
+    link = db.Column(db.String(255))
     posted_at = db.Column(db.TIMESTAMP)
     is_deleted = db.Column(db.Boolean)
     review_status = db.Column(db.Boolean)
@@ -34,6 +35,7 @@ class NewsView(BaseMTView):
         source='来源',
         author='作者',
         photo_abstract='缩略图地址',
+        link='文章链接',
         posted_at='发布时间',
         is_deleted='隐藏',
         review_status='审核状态',
@@ -51,6 +53,7 @@ class NewsView(BaseMTView):
         'source',
         'author',
         'posted_at',
+        # 'link',
         'is_deleted',
         'review_status',
         'created_at',
@@ -62,7 +65,7 @@ class NewsView(BaseMTView):
     column_filters = ('author',)
     column_default_sort = ('id', True)
 
-    column_editable_list = ('title', 'source',
+    column_editable_list = ('title', 'source', 'link',
                             'author', 'posted_at')
 
     def _list_thumbnail(view, context, model, name):
@@ -93,6 +96,7 @@ class NewsView(BaseMTView):
         'source',
         'author',
         'photo_abstract',
+        'link',
         'is_deleted',
         'review_status',
     )
