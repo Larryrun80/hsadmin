@@ -13,6 +13,7 @@ class Ico(db.Model):
     ico_datetime = db.Column(db.String(50))
     ico_amount = db.Column(db.String(50))
     ico_distribution = db.Column(db.String(500))
+    description = db.Column(db.String(500))
     team = db.Column(db.String(1000))
     advisor = db.Column(db.String(500))
     partership = db.Column(db.String(500))
@@ -33,6 +34,7 @@ class IcoView(BaseMTView):
                          ico_datetime='ICO时间',
                          ico_amount='ICO总量',
                          ico_distribution='分发模式',
+                         description='项目介绍',
                          team='团队',
                          advisor='顾问',
                          partership='合作关系',
@@ -44,6 +46,7 @@ class IcoView(BaseMTView):
     )
     column_list = (
         'currency',
+        'description',
         'ico_cost',
         'ico_amount',
         'ico_datetime',
@@ -54,15 +57,10 @@ class IcoView(BaseMTView):
 
     column_default_sort = ('id', True)
     column_formatters = dict(
-        created_at=lambda v, c, m, p: arrow.get(m.created_at)
-                                           .to('Asia/Shanghai')
-                                           .format('YYYY-MM-DD HH:mm:ss'),
-        updated_at=lambda v, c, m, p: arrow.get(m.updated_at)
-                                           .to('Asia/Shanghai')
-                                           .format('YYYY-MM-DD HH:mm:ss'),
+        description=lambda v, c, m, p: 'Y' if m.description else 'N'
     )
-    # column_editable_list = ('content_translation', 'review_status')
+    column_editable_list = ('ico_cost', 'ico_datetime', 'ico_amount')
 
-    form_columns = ('currency_id', 'ico_cost', 'ico_datetime', 'ico_amount',
-                    'ico_distribution', 'team', 'advisor',
+    form_columns = ('currency_id', 'description', 'ico_cost', 'ico_datetime',
+                    'ico_amount', 'ico_distribution', 'team', 'advisor',
                     'partership', 'is_deleted')
