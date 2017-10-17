@@ -12,6 +12,16 @@ class Currency(db.Model):
     alias = db.Column(db.String(50))
     mytoken_id = db.Column(db.String(20))
     website = db.Column(db.String(255))
+    twitter = db.Column(db.String(255))
+    facebook = db.Column(db.String(255))
+    weibo = db.Column(db.String(255))
+    slack = db.Column(db.String(255))
+    github = db.Column(db.String(255))
+    whitepaper = db.Column(db.String(255))
+    explorer = db.Column(db.String(255))
+    announcement = db.Column(db.String(255))
+    message_board = db.Column(db.String(255))
+    description = db.Column(db.String(500))
     rank = db.Column(db.Integer)
     market_cap_usd = db.Column(db.Float)
     available_supply = db.Column(db.BigInteger)
@@ -35,10 +45,12 @@ class CurrencyView(BaseMTView):
     can_create = False
     can_edit = True
 
-    column_labels = dict(alias='别名',
+    column_labels = dict(name='name ( symbol ) / alias',
+                         alias='别名',
                          website='官网',
                          rank='排名',
                          market_cap_usd='市值',
+                         ico='ICO信息',
                          available_supply='流通量',
                          total_supply='当前总量',
                          max_supply='总量上限',
@@ -54,22 +66,52 @@ class CurrencyView(BaseMTView):
         total_supply='当前已经生成的货币数量',
         max_supply='理论上货币数量的最大值',
         search_field='用于用户搜索的关键词，用空格分隔',
-        wallet='支持的钱包'
+        wallet='支持的钱包',
     )
-    column_exclude_list = [
+    column_list = [
+        'id',
+        'name',
+        'mytoken_id',
+        'rank',
         'website',
-        'market_cap_usd',
-        'available_supply',
-        'total_supply',
-        'max_supply',
-        'search_field',
-        'wallet'
+        'ico',
+        'created_at',
+        'updated_at',
     ]
     column_sortable_list = ('id', 'symbol', 'rank', 'created_at', 'updated_at')
     column_filters = ('name', 'symbol')
     column_searchable_list = ('name', 'symbol')
     column_default_sort = ('id', True)
 
+    def _list_name(view, context, model, name):
+        if not model.alias:
+            return '{} ( {} )'.format(model.name,
+                                      model.symbol)
+        else:
+            return '{} ( {} ) / {}'.format(model.name,
+                                           model.symbol,
+                                           model.alias)
+
+    column_formatters = dict(
+        name=_list_name,
+        website=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'website'),
+        ico=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'ico'),
+    )
+
     # column_editable_list = ('content_translation', 'review_status')
 
-    form_columns = ('alias', 'website', 'wallet')
+    form_columns = (
+        'alias',
+        'website',
+        'twitter',
+        'wallet',
+        'facebook',
+        'weibo',
+        'slack',
+        'github',
+        'whitepaper',
+        'explorer',
+        'announcement',
+        'message_board',
+        'description',
+    )

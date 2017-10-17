@@ -1,4 +1,5 @@
 import arrow
+from jinja2 import Markup
 
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.form import SecureForm
@@ -28,3 +29,11 @@ class BaseMTView(ModelView):
         model.updated_at = arrow.now().timestamp
         if is_created:
             model.created_at = arrow.now().timestamp
+
+    @staticmethod
+    def _list_html(view, context, model, name, key):
+        return Markup(getattr(model, key))
+
+    @staticmethod
+    def _list_has_value(view, context, model, name, key):
+        return 'Y' if getattr(model, key) else 'N'

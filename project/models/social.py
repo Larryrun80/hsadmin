@@ -55,6 +55,9 @@ class SocialView(BaseMTView):
     column_searchable_list = ('social_account',)
     column_default_sort = ('posted_at', True)
     column_formatters = dict(
+        content=lambda v, c, m, p: BaseMTView._list_html(v, c, m, p, 'content'),
+        content_translation=lambda v, c, m, p: BaseMTView._list_html(
+            v, c, m, p, 'content_translation'),
         posted_at=lambda v, c, m, p: arrow.get(m.posted_at)
                                           .to('Asia/Shanghai')
                                           .format('YYYY-MM-DD HH:mm:ss')
