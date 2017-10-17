@@ -28,7 +28,7 @@ class SocialView(BaseMTView):
     can_create = False
 
     column_labels = dict(social_account='账号',
-                         social_account_remark='账号备注',
+                         social_account_remark='备注',
                          content='原文',
                          content_translation='译文',
                          source='来源',
@@ -51,7 +51,7 @@ class SocialView(BaseMTView):
     )
     # column_exclude_list = ['social_content_id', ]
     column_sortable_list = ('posted_at',)
-    column_filters = ('social_account',)
+    column_filters = ('social_account', 'social_account_remark')
     column_searchable_list = ('social_account',)
     column_default_sort = ('posted_at', True)
     column_formatters = dict(
