@@ -24,6 +24,7 @@ class Currency(db.Model):
     announcement = db.Column(db.String(255))
     message_board = db.Column(db.String(255))
     email = db.Column(db.String(255))
+    telegram = db.Column(db.String(255))
     reddit = db.Column(db.String(255))
     description = db.Column(db.String(500))
     rank = db.Column(db.Integer)
@@ -131,6 +132,7 @@ class CurrencyView(BaseMTView):
         'weibo',
         'slack',
         'github',
+        'telegram',
         'email',
         'reddit',
         'whitepaper',
