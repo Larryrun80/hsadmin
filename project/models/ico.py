@@ -1,7 +1,6 @@
-import arrow
-
 from .. import db
 from .base_mt_view import BaseMTView
+from .currency import Currency
 
 
 class Ico(db.Model):
@@ -53,6 +52,7 @@ class IcoView(BaseMTView):
         'created_at',
         'updated_at'
     )
+    column_searchable_list = (Currency.symbol, Currency.name)
     column_sortable_list = ('created_at', 'updated_at')
 
     column_default_sort = ('id', True)
