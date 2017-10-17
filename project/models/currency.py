@@ -23,6 +23,8 @@ class Currency(db.Model):
     explorer = db.Column(db.String(255))
     announcement = db.Column(db.String(255))
     message_board = db.Column(db.String(255))
+    email = db.Column(db.String(255))
+    reddit = db.Column(db.String(255))
     description = db.Column(db.String(500))
     rank = db.Column(db.Integer)
     market_cap_usd = db.Column(db.Float)
@@ -129,6 +131,8 @@ class CurrencyView(BaseMTView):
         'weibo',
         'slack',
         'github',
+        'email',
+        'reddit',
         'whitepaper',
         'explorer',
         'announcement',
