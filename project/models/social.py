@@ -47,7 +47,6 @@ class SocialView(BaseMTView):
         'social_account_remark',
         'content',
         'content_translation',
-        'is_deleted',
         'review_status',
     )
     # column_exclude_list = ['social_content_id', ]
@@ -63,7 +62,7 @@ class SocialView(BaseMTView):
                                           .to('Asia/Shanghai')
                                           .format('YYYY-MM-DD HH:mm:ss')
     )
-    # column_editable_list = ('content_translation', 'review_status')
+    column_editable_list = ('review_status',)
 
     form_columns = (
         'currency',

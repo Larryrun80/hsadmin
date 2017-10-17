@@ -1,3 +1,5 @@
+import arrow
+
 from .. import db
 from .base_mt_view import BaseMTView
 
@@ -56,6 +58,8 @@ class CurrencyView(BaseMTView):
                          max_supply='总量上限',
                          search_field='搜索词',
                          wallet='钱包',
+                         info='基本信息',
+                         description='简介',
                          # review_status='审核状态',
                          # enabled='有效',
                          created_at='创建时间',
@@ -73,7 +77,9 @@ class CurrencyView(BaseMTView):
         'name',
         'mytoken_id',
         'rank',
-        'website',
+        'info',
+        'wallet',
+        'description',
         'ico',
         'created_at',
         'updated_at',
@@ -92,13 +98,25 @@ class CurrencyView(BaseMTView):
                                            model.symbol,
                                            model.alias)
 
+    def _list_infoed(view, context, model, name):
+        return 'Y' if (model.twitter or model.facebook or model.slack or model.github) else 'N'
+
     column_formatters = dict(
         name=_list_name,
         website=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'website'),
         ico=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'ico'),
+        info=_list_infoed,
+        wallet=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'wallet'),
+        description=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'description'),
+        created_at=lambda v, c, m, p: arrow.get(m.created_at)
+                                           .to('Asia/Shanghai')
+                                           .format('YYYY-MM-DD HH:mm:ss'),
+        updated_at=lambda v, c, m, p: arrow.get(m.updated_at)
+                                           .to('Asia/Shanghai')
+                                           .format('YYYY-MM-DD HH:mm:ss'),
     )
 
-    column_export_list = ('id', 'name', 'symbol', 'rank')
+    column_export_list = ('id', 'name', 'symbol', 'rank', 'description')
 
     # column_editable_list = ('content_translation', 'review_status')
 

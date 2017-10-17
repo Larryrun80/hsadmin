@@ -8,6 +8,7 @@ class TopMarket(db.Model):
 
     # Columns
     id = db.Column(db.Integer, primary_key=True)
+    weight = db.Column(db.Integer)
     is_deleted = db.Column(db.Boolean)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
@@ -23,6 +24,7 @@ class TopMarketView(BaseMTView):
 
     column_labels = dict(
         market='市场名',
+        weight='权重',
         is_deleted='删除',
         created_at='创建时间',
         updated_at='修改时间'
@@ -30,17 +32,18 @@ class TopMarketView(BaseMTView):
 
     column_list = (
         'market',
+        'weight',
         'is_deleted',
         'created_at',
         'updated_at',
     )
 
-    column_sortable_list = ('created_at',)
+    column_sortable_list = ('weight', 'created_at',)
     column_filters = ('is_deleted',)
     # column_searchable_list = ('market',)
-    column_default_sort = ('id', True)
+    column_default_sort = ('weight', True)
 
-    column_editable_list = ('is_deleted',)
+    column_editable_list = ('weight', 'is_deleted',)
 
     form_ajax_refs = {
         'market': {

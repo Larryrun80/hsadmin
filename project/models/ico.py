@@ -45,7 +45,6 @@ class IcoView(BaseMTView):
     )
     column_list = (
         'currency',
-        'description',
         'ico_cost',
         'ico_amount',
         'ico_datetime',
@@ -56,12 +55,9 @@ class IcoView(BaseMTView):
     column_sortable_list = ('created_at', 'updated_at')
 
     column_default_sort = ('id', True)
-    column_formatters = dict(
-        description=lambda v, c, m, p: 'Y' if m.description else 'N'
-    )
     column_editable_list = ('ico_cost', 'ico_datetime', 'ico_amount')
 
-    form_columns = ('currency', 'description', 'ico_cost', 'ico_datetime',
+    form_columns = ('currency', 'ico_cost', 'ico_datetime',
                     'ico_amount', 'ico_distribution', 'team', 'advisor',
                     'partership', 'is_deleted')
 
