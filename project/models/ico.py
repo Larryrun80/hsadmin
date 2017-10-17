@@ -61,6 +61,12 @@ class IcoView(BaseMTView):
     )
     column_editable_list = ('ico_cost', 'ico_datetime', 'ico_amount')
 
-    form_columns = ('currency_id', 'description', 'ico_cost', 'ico_datetime',
+    form_columns = ('currency', 'description', 'ico_cost', 'ico_datetime',
                     'ico_amount', 'ico_distribution', 'team', 'advisor',
                     'partership', 'is_deleted')
+
+    form_ajax_refs = {
+        'currency': {
+            'fields': (Currency.name, Currency.symbol)
+        },
+    }
