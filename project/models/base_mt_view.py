@@ -12,7 +12,7 @@ class BaseMTView(ModelView):
 
     page_size = 20
     can_set_page_size = True
-    # can_export = True
+    can_export = True
     can_view_details = True
     column_display_pk = True
 

@@ -1,4 +1,5 @@
 from .. import db
+from .market import Market
 from .base_mt_view import BaseMTView
 
 
@@ -40,3 +41,9 @@ class TopMarketView(BaseMTView):
     column_default_sort = ('id', True)
 
     column_editable_list = ('is_deleted',)
+
+    form_ajax_refs = {
+        'market': {
+            'fields': (Market.name,)
+        },
+    }

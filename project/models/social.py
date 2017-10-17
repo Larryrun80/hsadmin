@@ -1,6 +1,7 @@
 import arrow
 
 from .. import db
+from .currency import Currency
 from .base_mt_view import BaseMTView
 
 
@@ -65,8 +66,14 @@ class SocialView(BaseMTView):
     # column_editable_list = ('content_translation', 'review_status')
 
     form_columns = (
-        'currency_id',
+        'currency',
         'social_account',
         'content_translation',
         'review_status'
     )
+
+    form_ajax_refs = {
+        'currency': {
+            'fields': (Currency.name, Currency.symbol)
+        },
+    }

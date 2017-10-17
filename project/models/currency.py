@@ -98,6 +98,8 @@ class CurrencyView(BaseMTView):
         ico=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'ico'),
     )
 
+    column_export_list = ('id', 'name', 'symbol', 'rank')
+
     # column_editable_list = ('content_translation', 'review_status')
 
     form_columns = (
