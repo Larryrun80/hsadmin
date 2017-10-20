@@ -13,6 +13,7 @@ class Social(db.Model):
     social_account = db.Column(db.String(50))
     social_content_id = db.Column(db.String(20))
     social_account_remark = db.Column(db.String(20))
+    social_avatar = db.Column(db.String(255))
     content = db.Column(db.String(1000))
     content_translation = db.Column(db.String(1000))
     source = db.Column(db.String(20))
@@ -29,6 +30,7 @@ class SocialView(BaseMTView):
 
     column_labels = dict(social_account='账号',
                          social_account_remark='备注',
+                         social_avatar='头像',
                          content='原文',
                          content_translation='译文',
                          source='来源',
@@ -40,6 +42,7 @@ class SocialView(BaseMTView):
     )
     column_list = (
         # Social.currency,
+        'social_avatar',
         'currency',
         'source',
         'posted_at',
@@ -55,6 +58,8 @@ class SocialView(BaseMTView):
     column_searchable_list = ('social_account',)
     column_default_sort = ('posted_at', True)
     column_formatters = dict(
+        social_avatar=lambda v, c, m, p: BaseMTView._list_thumbnail(
+            v, c, m, p, 'social_avatar'),
         content=lambda v, c, m, p: BaseMTView._list_html(v, c, m, p, 'content'),
         content_translation=lambda v, c, m, p: BaseMTView._list_html(
             v, c, m, p, 'content_translation'),

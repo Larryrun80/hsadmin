@@ -37,3 +37,12 @@ class BaseMTView(ModelView):
     @staticmethod
     def _list_has_value(view, context, model, name, key):
         return 'Y' if getattr(model, key) else 'N'
+
+    @staticmethod
+    def _list_thumbnail(view, context, model, name, key):
+        if not getattr(model, key):
+            return ''
+
+        return Markup(
+            '<img src="{}" style="width: 100px; height: 75px;">'.format(
+                getattr(model, key)))

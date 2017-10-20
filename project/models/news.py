@@ -68,16 +68,9 @@ class NewsView(BaseMTView):
     column_editable_list = ('title', 'source', 'link',
                             'author', 'posted_at')
 
-    def _list_thumbnail(view, context, model, name):
-        if not model.photo_abstract:
-            return ''
-
-        return Markup(
-            '<img src="{}" style="width: 100px; height: 75px;">'.format(
-                model.photo_abstract))
-
     column_formatters = dict(
-        photo_abstract=_list_thumbnail,
+        photo_abstract=lambda v, c, m, p: BaseMTView._list_thumbnail(
+            v, c, m, p, 'photo_abstract'),
         posted_at=lambda v, c, m, p: arrow.get(m.created_at)
                                           .to('Asia/Shanghai')
                                           .format('YYYY-MM-DD HH:mm:ss'),
