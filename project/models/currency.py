@@ -27,6 +27,7 @@ class Currency(db.Model):
     telegram = db.Column(db.String(255))
     reddit = db.Column(db.String(255))
     description = db.Column(db.String(500))
+    description_en = db.Column(db.String(500))
     rank = db.Column(db.Integer)
     market_cap_usd = db.Column(db.Float)
     available_supply = db.Column(db.BigInteger)
@@ -35,7 +36,7 @@ class Currency(db.Model):
     search_field = db.Column(db.String(255))
     wallet = db.Column(db.String(200))
     # review_status = db.Column(db.Boolean)
-    # enabled = db.Column(db.Boolean)
+    enabled = db.Column(db.Boolean)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
 
@@ -64,7 +65,7 @@ class CurrencyView(BaseMTView):
                          info='基本信息',
                          description='简介',
                          # review_status='审核状态',
-                         # enabled='有效',
+                         enabled='有效',
                          created_at='创建时间',
                          updated_at='修改时间')
     column_descriptions = dict(
@@ -84,11 +85,12 @@ class CurrencyView(BaseMTView):
         'wallet',
         'description',
         'ico',
+        'enabled',
         'created_at',
         'updated_at',
     ]
     column_sortable_list = ('id', 'symbol', 'rank', 'created_at', 'updated_at')
-    column_filters = ('name', 'symbol')
+    column_filters = ('name', 'symbol', 'enabled')
     column_searchable_list = ('name', 'symbol')
     column_default_sort = ('id', True)
 
@@ -140,4 +142,5 @@ class CurrencyView(BaseMTView):
         'announcement',
         'message_board',
         'description',
+        'description_en',
     )
