@@ -61,6 +61,7 @@ from .models.announcement import Announcement, AnnouncementView
 from .models.news import News, NewsView
 from .models.market import Market, MarketView
 from .models.top_market import TopMarket, TopMarketView
+from .models.social_raw import SocialCurrency, SocialCurrencyView
 
 admin.add_view(CurrencyView(Currency, db.session, name='数字货币'))
 admin.add_view(IcoView(Ico, db.session, name='ICO信息'))
@@ -69,6 +70,7 @@ admin.add_view(AnnouncementView(Announcement, db.session, name='公告'))
 admin.add_view(NewsView(News, db.session, name='早知道'))
 admin.add_view(MarketView(Market, db.session, name='交易所'))
 admin.add_view(TopMarketView(TopMarket, db.session, name='App交易所'))
+admin.add_view(SocialCurrencyView(SocialCurrency, db.session, name='社交账号'))
 
 
 # ###################
