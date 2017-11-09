@@ -17,6 +17,7 @@ class News(db.Model):
     author = db.Column(db.String(50))
     photo_abstract = db.Column(db.String(255))
     link = db.Column(db.String(255))
+    tag = db.Column(db.String(20))
     posted_at = db.Column(db.TIMESTAMP)
     is_deleted = db.Column(db.Boolean)
     review_status = db.Column(db.Boolean)
@@ -34,6 +35,7 @@ class NewsView(BaseMTView):
         content='内容',
         source='来源',
         author='作者',
+        tag='标签',
         photo_abstract='缩略图地址',
         link='文章链接',
         posted_at='发布时间',
@@ -49,6 +51,7 @@ class NewsView(BaseMTView):
     column_list = (
         'photo_abstract',
         'title',
+        'tag',
         # 'abstract',
         'source',
         'author',
@@ -66,11 +69,27 @@ class NewsView(BaseMTView):
     column_default_sort = ('id', True)
 
     column_editable_list = ('title', 'source', 'link',
-                            'author', 'posted_at')
+                            'author', 'posted_at', 'tag')
+
+    form_choices = {
+        'tag': [
+            ('news', '教程'),
+            ('new_currency', '每日上新'),
+        ]
+    }
+
+    def _get_tag(view, context, model, name):
+        tags = view.form_choices['tag']
+        for (val, display) in tags:
+            if val == model.tag:
+                return display
+
+        return ''
 
     column_formatters = dict(
         photo_abstract=lambda v, c, m, p: BaseMTView._list_thumbnail(
             v, c, m, p, 'photo_abstract'),
+        tag=_get_tag,
         posted_at=lambda v, c, m, p: arrow.get(m.created_at)
                                           .to('Asia/Shanghai')
                                           .format('YYYY-MM-DD HH:mm:ss'),
@@ -85,6 +104,7 @@ class NewsView(BaseMTView):
     form_columns = (
         'title',
         'abstract',
+        'tag',
         'content',
         'source',
         'author',
