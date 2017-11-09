@@ -72,6 +72,7 @@ class SocialView(BaseMTView):
     form_columns = (
         'currency',
         'social_account',
+        'content',
         'content_translation',
         'review_status'
     )

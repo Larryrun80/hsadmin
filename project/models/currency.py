@@ -1,6 +1,7 @@
 import arrow
 
 from .. import db
+from .country import Country
 from .base_mt_view import BaseMTView
 
 
@@ -42,6 +43,8 @@ class Currency(db.Model):
 
     socials = db.relationship('Social', back_populates='currency')
     ico = db.relationship('Ico', uselist=False, back_populates='currency')
+    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    country = db.relationship('Country', back_populates='currencies')
 
     def __repr__(self):
         return '{} ({})'.format(self.name, self.symbol)
@@ -127,6 +130,7 @@ class CurrencyView(BaseMTView):
 
     form_columns = (
         'alias',
+        'country',
         'website',
         'twitter',
         'wallet',
@@ -144,3 +148,13 @@ class CurrencyView(BaseMTView):
         'description',
         'description_en',
     )
+
+    form_ajax_refs = {
+        'country': {
+            'fields': (
+                Country.short_name,
+                Country.alpha2_code,
+                Country.alpha3_code
+            )
+        },
+    }

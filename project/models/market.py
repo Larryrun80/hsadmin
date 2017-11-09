@@ -1,4 +1,5 @@
 from .. import db
+from .country import Country
 from .base_mt_view import BaseMTView
 
 
@@ -15,6 +16,9 @@ class Market(db.Model):
     enabled = db.Column(db.Boolean)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
+
+    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    country = db.relationship('Country', back_populates='markets')
 
     top_market = db.relationship(
         'TopMarket',
@@ -33,8 +37,9 @@ class MarketView(BaseMTView):
     column_labels = dict(
         name='市场名',
         alias='别名',
+        country='国家',
         website='官网',
-        synchronized='脚本同步',
+        synchronized='可搜索',
         weight='权重',
         enabled='有效',
         created_at='创建时间',
@@ -47,6 +52,7 @@ class MarketView(BaseMTView):
 
     column_list = (
         'name',
+        'country',
         'alias',
         'top_market',
         'synchronized',
@@ -61,4 +67,4 @@ class MarketView(BaseMTView):
     column_searchable_list = ('name',)
     column_default_sort = ('id', True)
 
-    column_editable_list = ('alias', 'weight', 'enabled', 'top_market')
+    column_editable_list = ('alias', 'weight', 'country', 'enabled', 'top_market')
