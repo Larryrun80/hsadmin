@@ -63,6 +63,7 @@ class SocialCurrencyView(BaseMTView):
             ('投资人', '投资人'),
             ('媒体', '媒体'),
             ('数据公司', '数据公司'),
+            ('KOL', 'KOL'),
             ('', '其他')
         ]
     }
