@@ -103,10 +103,10 @@ class ICORawView(BaseMTView):
     column_editable_list = ('project_id', 'country')
 
     column_formatters = dict(
-        opening_date_standard=lambda v, c, m, p: arrow.get(m.created_at)
+        opening_date_standard=lambda v, c, m, p: arrow.get(m.opening_date_standard)
                                                       .to('Asia/Shanghai')
                                                       .format('YYYY-MM-DD HH:mm:ss'),
-        close_date_standard=lambda v, c, m, p: arrow.get(m.updated_at)
+        close_date_standard=lambda v, c, m, p: arrow.get(m.close_date_standard)
                                                     .to('Asia/Shanghai')
                                                     .format('YYYY-MM-DD HH:mm:ss'),
         logo=lambda v, c, m, p: BaseMTView._list_thumbnail(
