@@ -66,18 +66,24 @@ from .models.social_raw import SocialCurrency, SocialCurrencyView
 from .models.country import Country, CountryView
 from .models.ico_raw import ICORaw, ICORawView
 from .models.ico_project import ICOProject, ICOProjectView
+from .models.ico_project import Rater, RaterView
+from .models.ico_project import Tag, TagView
+# from .models.ico_project import ProjectRate, ProjectRateView
 
-admin.add_view(CurrencyView(Currency, db.session, name='数字货币'))
-admin.add_view(IcoView(Ico, db.session, name='ICO信息'))
-admin.add_view(SocialView(Social, db.session, name='社交／推特'))
 admin.add_view(AnnouncementView(Announcement, db.session, name='公告'))
-admin.add_view(NewsView(News, db.session, name='早知道'))
-admin.add_view(MarketView(Market, db.session, name='交易所'))
-admin.add_view(TopMarketView(TopMarket, db.session, name='App交易所'))
-admin.add_view(SocialCurrencyView(SocialCurrency, db.session, name='社交账号'))
-admin.add_view(CountryView(Country, db.session, name='国家'))
-admin.add_view(ICORawView(ICORaw, db.session, name='ico项目-源'))
-admin.add_view(ICOProjectView(ICOProject, db.session, name='ICO项目'))
+admin.add_view(CurrencyView(Currency, db.session, name='数字货币', category='货币'))
+admin.add_view(IcoView(Ico, db.session, name='ICO信息', category='货币'))
+admin.add_view(SocialView(Social, db.session, name='社交／推特', category='内容'))
+admin.add_view(NewsView(News, db.session, name='早知道', category='内容'))
+admin.add_view(MarketView(Market, db.session, name='交易所', category='交易所'))
+admin.add_view(TopMarketView(TopMarket, db.session, name='App交易所', category='交易所'))
+admin.add_view(ICOProjectView(ICOProject, db.session, name='ICO项目', category='ICOPROJECT'))
+admin.add_view(RaterView(Rater, db.session, name='评级者', category='ICOPROJECT'))
+admin.add_view(TagView(Tag, db.session, name='标签', category='ICOPROJECT'))
+# admin.add_view(ProjectRateView(ProjectRate, db.session, name='评分', category='ICOPROJECT'))
+admin.add_view(CountryView(Country, db.session, name='国家', category='其他'))
+admin.add_view(SocialCurrencyView(SocialCurrency, db.session, name='社交账号', category='预处理'))
+admin.add_view(ICORawView(ICORaw, db.session, name='ico项目-源', category='预处理'))
 
 
 # ###################

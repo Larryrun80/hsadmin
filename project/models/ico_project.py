@@ -6,6 +6,15 @@ from jinja2 import Markup
 from .editor import CKTextAreaField
 
 
+projects_tags_table = db.Table('project_tag', db.Model.metadata,
+                               db.Column('project_id', db.Integer, db.ForeignKey('project.id')),
+                               db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+                               )
+projects_raters_table = db.Table('project_rate', db.Model.metadata,
+                               db.Column('project_id', db.Integer, db.ForeignKey('project.id')),
+                               db.Column('rater_id', db.Integer, db.ForeignKey('rater.id')),
+                               )
+
 class ICOProject(db.Model):
     __tablename__ = 'project'
 
@@ -68,6 +77,61 @@ class ICOProject(db.Model):
     currency = db.relationship('Currency', back_populates='icoproject')
     country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
     country = db.relationship('Country', back_populates='icoprojects')
+    # raters = db.relationship("ProjectRate", back_populates="project")
+    # tags = db.relationship("ProjectTag", back_populates="project")
+    raters = db.relationship('Rater', secondary=projects_raters_table)
+    tags = db.relationship('Tag', secondary=projects_tags_table)
+
+    def __repr__(self):
+        return self.name
+
+
+class Rater(db.Model):
+    __tablename__ = 'rater'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(20), nullable=False)
+    url = db.Column(db.String(255))
+    weight = db.Column(db.Integer)
+    created_at = db.Column(db.Integer)
+    updated_at = db.Column(db.Integer)
+    # projects = db.relationship("ProjectRate", back_populates="rater")
+
+    def __repr__(self):
+        return self.name
+
+
+class Tag(db.Model):
+    __tablename__ = 'tag'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), nullable=False)
+    name_cn = db.Column(db.String(50))
+    weight = db.Column(db.Integer)
+    is_deleted = db.Column(db.Boolean)
+    created_at = db.Column(db.Integer)
+    updated_at = db.Column(db.Integer)
+
+    def __repr__(self):
+        if self.name_cn:
+            return '{} / {}'.format(self.name, self.name_cn)
+        else:
+            return self.name
+
+
+# class ProjectRate(db.Model):
+#     __tablename__ = 'project_rate'
+
+#     grade = db.Column(db.String(100))
+#     report_link = db.Column(db.String(255))
+#     comment = db.Column(db.Text)
+#     created_at = db.Column(db.Integer)
+#     updated_at = db.Column(db.Integer)
+#     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
+#     project = db.relationship('ICOProject', back_populates='raters')
+#     rater_id = db.Column(db.Integer, db.ForeignKey('rater.id'))
+#     rater = db.relationship('Rater', back_populates='projects')
+
+#     def __repr__(self):
+#         return self.rater.name
 
 
 class ICOProjectView(BaseMTView):
@@ -154,6 +218,8 @@ class ICOProjectView(BaseMTView):
         'currency_symbol',
         'logo',
         'country',
+        'tags',
+        'raters',
         'max_supply',
         'blockchain',
         'website',
@@ -210,3 +276,90 @@ class ICOProjectView(BaseMTView):
     }
     create_template = 'ckeditor.html'
     edit_template = 'ckeditor.html'
+
+    form_ajax_refs = {
+        'tags': {
+            'fields': (Tag.name, Tag.name_cn)
+        },
+        'raters': {
+            'fields': (Rater.name,)
+        }
+    }
+
+class RaterView(BaseMTView):
+    can_create = True
+
+    column_labels = dict(
+        name='评级者',
+        weight='评级权重',
+        created_at='创建时间',
+        updated_at='修改时间'
+    )
+
+    column_descriptions = dict(
+        weight='数字越大优先级越高',
+    )
+
+    column_sortable_list = ('name', 'weight', 'created_at', 'updated_at')
+    column_searchable_list = ('name', )
+    column_filters = ('weight', )
+    column_default_sort = ('id', False)
+
+    column_editable_list = ('name', 'weight', 'url')
+
+class TagView(BaseMTView):
+    can_create = True
+
+    column_labels = dict(
+        name='标签/En',
+        name_cn='标签/Cn',
+        weight='权重',
+        is_deleted='删除',
+        created_at='创建时间',
+        updated_at='修改时间'
+    )
+
+    column_descriptions = dict(
+        weight='数字越大优先级越高',
+    )
+
+    column_sortable_list = ('name', 'weight', 'created_at', 'updated_at')
+    column_searchable_list = ('name', )
+    column_filters = ('weight', 'is_deleted')
+    column_default_sort = ('id', False)
+
+    column_editable_list = ('name', 'name_cn', 'weight', 'is_deleted')
+
+# class ProjectRateView(BaseMTView):
+#     can_create = True
+
+#     column_labels = dict(
+#         project='项目',
+#         rater='评分者',
+#         grade='评分',
+#         report_link='报告url',
+#         comment='评论',
+#         created_at='创建时间',
+#         updated_at='修改时间'
+#     )
+
+#     column_list = (
+#         'project',
+#         'rater',
+#         'grade',
+#         'report_link',
+#         'comment',
+#         'created_at',
+#         'updated_at',
+#     )
+
+#     # column_descriptions = dict(
+#     #     weight='数字越大优先级越高',
+#     # )
+
+#     column_sortable_list = ('created_at', 'updated_at')
+#     column_searchable_list = (ICOProject.name, Rater.name)
+#     column_filters = (ICOProject.name, Rater.name, 'grade')
+#     column_default_sort = ('created_at', False)
+
+#     column_editable_list = ('grade', 'report_link', 'comment')
