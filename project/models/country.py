@@ -14,6 +14,7 @@ class Country(db.Model):
     flag = db.Column(db.String(255))
 
     currencies = db.relationship('Currency', back_populates='country')
+    icoprojects = db.relationship('ICOProject', back_populates='country')
     markets = db.relationship('Market', back_populates='country')
 
     def __repr__(self):

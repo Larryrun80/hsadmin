@@ -1,53 +1,53 @@
 import arrow
 
-from .. import db
+from .. import dbt
 from .base_mt_view import BaseMTView
 from jinja2 import Markup
 
 
-class ICORaw(db.Model):
-    __tablename__ = 'project'
+class ICORaw(dbt.Model):
     __bind_key__ = 'social'
+    __tablename__ = 'project'
 
     # Columns
-    id = db.Column(db.Integer, primary_key=True)
-    project_id = db.Column(db.String(100))
-    country = db.Column(db.String(50))
-    name = db.Column(db.String(100))
-    symbol = db.Column(db.String(10))
-    info_source = db.Column(db.String(255))
-    info_source_url = db.Column(db.String(255))
-    task_id = db.Column(db.String(64))
-    logo = db.Column(db.String(1000))
-    funded = db.Column(db.String(20))
-    website = db.Column(db.String(255))
-    twitter = db.Column(db.String(255))
-    facebook = db.Column(db.String(255))
-    bitcointalk = db.Column(db.String(255))
-    email = db.Column(db.String(255))
-    telegram = db.Column(db.String(255))
-    reddit = db.Column(db.String(255))
-    slack = db.Column(db.String(255))
-    blog = db.Column(db.String(255))
-    linkedin = db.Column(db.String(255))
-    whitepaper = db.Column(db.String(255))
-    github = db.Column(db.String(255))
-    blockchain = db.Column(db.String(50))
-    brief_intro = db.Column(db.String(1000))
-    detail_intro = db.Column(db.Text)
-    features = db.Column(db.Text)
-    opening_date = db.Column(db.String(20))
-    close_date = db.Column(db.String(20))
-    opening_date_standard = db.Column(db.TIMESTAMP)
-    close_date_standard = db.Column(db.TIMESTAMP)
-    token_distribution = db.Column(db.Text)
-    team = db.Column(db.Text)
-    hardcap = db.Column(db.String(50))
-    accepts = db.Column(db.String(100))
-    ico_price = db.Column(db.Text)
-    bounty = db.Column(db.Text)
-    created_at = db.Column(db.TIMESTAMP)
-    updated_at = db.Column(db.TIMESTAMP)
+    id = dbt.Column(dbt.Integer, primary_key=True)
+    project_id = dbt.Column(dbt.String(100))
+    country = dbt.Column(dbt.String(50))
+    name = dbt.Column(dbt.String(100))
+    symbol = dbt.Column(dbt.String(10))
+    info_source = dbt.Column(dbt.String(255))
+    info_source_url = dbt.Column(dbt.String(255))
+    task_id = dbt.Column(dbt.String(64))
+    logo = dbt.Column(dbt.String(1000))
+    funded = dbt.Column(dbt.String(20))
+    website = dbt.Column(dbt.String(255))
+    twitter = dbt.Column(dbt.String(255))
+    facebook = dbt.Column(dbt.String(255))
+    bitcointalk = dbt.Column(dbt.String(255))
+    email = dbt.Column(dbt.String(255))
+    telegram = dbt.Column(dbt.String(255))
+    reddit = dbt.Column(dbt.String(255))
+    slack = dbt.Column(dbt.String(255))
+    blog = dbt.Column(dbt.String(255))
+    linkedin = dbt.Column(dbt.String(255))
+    whitepaper = dbt.Column(dbt.String(255))
+    github = dbt.Column(dbt.String(255))
+    blockchain = dbt.Column(dbt.String(50))
+    brief_intro = dbt.Column(dbt.String(1000))
+    detail_intro = dbt.Column(dbt.Text)
+    features = dbt.Column(dbt.Text)
+    opening_date = dbt.Column(dbt.String(20))
+    close_date = dbt.Column(dbt.String(20))
+    opening_date_standard = dbt.Column(dbt.TIMESTAMP)
+    close_date_standard = dbt.Column(dbt.TIMESTAMP)
+    token_distribution = dbt.Column(dbt.Text)
+    team = dbt.Column(dbt.Text)
+    hardcap = dbt.Column(dbt.String(50))
+    accepts = dbt.Column(dbt.String(100))
+    ico_price = dbt.Column(dbt.Text)
+    bounty = dbt.Column(dbt.Text)
+    created_at = dbt.Column(dbt.TIMESTAMP)
+    updated_at = dbt.Column(dbt.TIMESTAMP)
 
 
 class ICORawView(BaseMTView):

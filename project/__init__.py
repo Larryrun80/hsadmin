@@ -42,6 +42,7 @@ except:
 # #############################
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
+dbt = SQLAlchemy(app)
 
 
 # ###############################
@@ -64,6 +65,7 @@ from .models.top_market import TopMarket, TopMarketView
 from .models.social_raw import SocialCurrency, SocialCurrencyView
 from .models.country import Country, CountryView
 from .models.ico_raw import ICORaw, ICORawView
+from .models.ico_project import ICOProject, ICOProjectView
 
 admin.add_view(CurrencyView(Currency, db.session, name='数字货币'))
 admin.add_view(IcoView(Ico, db.session, name='ICO信息'))
@@ -75,6 +77,7 @@ admin.add_view(TopMarketView(TopMarket, db.session, name='App交易所'))
 admin.add_view(SocialCurrencyView(SocialCurrency, db.session, name='社交账号'))
 admin.add_view(CountryView(Country, db.session, name='国家'))
 admin.add_view(ICORawView(ICORaw, db.session, name='ico项目-源'))
+admin.add_view(ICOProjectView(ICOProject, db.session, name='ICO项目'))
 
 
 # ###################

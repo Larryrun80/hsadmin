@@ -43,6 +43,7 @@ class Currency(db.Model):
 
     socials = db.relationship('Social', back_populates='currency')
     ico = db.relationship('Ico', uselist=False, back_populates='currency')
+    icoproject = db.relationship('ICOProject', uselist=False, back_populates='currency')
     country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
     country = db.relationship('Country', back_populates='currencies')
 
