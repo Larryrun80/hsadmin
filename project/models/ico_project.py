@@ -199,6 +199,7 @@ class ICOProjectView(BaseMTView):
     column_editable_list = ('name', 'currency_symbol', 'brief_intro', 'ico_started_at', 'ico_ended_at')
 
     column_formatters = dict(
+        brief_intro=lambda v, c, m, p: m.brief_intro if not m.brief_intro_cn else '{} | {}'.format(m.brief_intro_cn, m.brief_intro),
         ico_started_at=lambda v, c, m, p: arrow.get(m.ico_started_at)
                                                .to('Asia/Shanghai')
                                                .format('YYYY-MM-DD HH:mm:ss'),
