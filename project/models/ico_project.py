@@ -249,6 +249,8 @@ class ICOProjectView(BaseMTView):
         'roadmap_cn',
         'ico_bounty',
         'ico_bounty_cn',
+        'ico_distribution',
+        'ico_distribution_cn',
         'plan',
         'plan_cn',
         'team',
