@@ -56,6 +56,8 @@ class ICOProject(db.Model):
     ico_ended_at = db.Column(db.TIMESTAMP)
     ico_bounty = db.Column(db.Text)
     ico_bounty_cn = db.Column(db.Text)
+    ico_distribution = db.Column(db.Text)
+    ico_distribution_cn = db.Column(db.Text)
     plan = db.Column(db.Text)
     plan_cn = db.Column(db.Text)
 
@@ -159,6 +161,8 @@ class ICOProjectView(BaseMTView):
         features_cn='项目特色/Cn',
         team='团队介绍/En',
         team_cn='团队介绍/Cn',
+        ico_distribution='代币分配/En',
+        ico_distribution_cn='代币分配/Cn',
         plan='募资规划/En',
         plan_cn='募资规划/Cn',
         roadmap='路线图/En',
