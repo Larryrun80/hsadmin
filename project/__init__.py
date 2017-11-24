@@ -71,8 +71,8 @@ from .models.ico_project import Tag, TagView
 # from .models.ico_project import ProjectRate, ProjectRateView
 
 admin.add_view(AnnouncementView(Announcement, db.session, name='公告'))
-admin.add_view(CurrencyView(Currency, db.session, name='数字货币', category='货币'))
-admin.add_view(IcoView(Ico, db.session, name='ICO信息', category='货币'))
+admin.add_view(CurrencyView(Currency, db.session, name='数字货币'))
+admin.add_view(IcoView(Ico, db.session, name='ICO信息'))
 admin.add_view(SocialView(Social, db.session, name='社交／推特', category='内容'))
 admin.add_view(NewsView(News, db.session, name='早知道', category='内容'))
 admin.add_view(MarketView(Market, db.session, name='交易所', category='交易所'))
