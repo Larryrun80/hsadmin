@@ -54,6 +54,7 @@ class ICOProject(db.Model):
 
     ico_started_at = db.Column(db.DateTime)
     ico_ended_at = db.Column(db.DateTime)
+    ico_price = db.Column(db.Text)
     ico_bounty = db.Column(db.Text)
     ico_bounty_cn = db.Column(db.Text)
     ico_distribution = db.Column(db.Text)
@@ -154,6 +155,7 @@ class ICOProjectView(BaseMTView):
         website='官网',
         twitter='推特',
         whitepaper='白皮书',
+        ico_price='ICO价格',
         ico_started_at='ICO开始时间',
         ico_ended_at='ICO结束时间',
         # project_started_at='项目开始时间',
@@ -245,6 +247,7 @@ class ICOProjectView(BaseMTView):
         'features_cn',
         'roadmap',
         'roadmap_cn',
+        'ico_price',
         'ico_bounty',
         'ico_bounty_cn',
         'ico_distribution',
