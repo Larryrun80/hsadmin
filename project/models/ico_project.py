@@ -271,6 +271,7 @@ class ICOProjectView(BaseMTView):
         'features_cn': CKTextAreaField,
         'roadmap': CKTextAreaField,
         'roadmap_cn': CKTextAreaField,
+        'ico_price': CKTextAreaField,
         'ico_bounty': CKTextAreaField,
         'ico_bounty_cn': CKTextAreaField,
         'ico_distribution': CKTextAreaField,
