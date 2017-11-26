@@ -42,7 +42,7 @@ class SocialCurrencyView(BaseMTView):
     column_default_sort = ('id', True)
     column_formatters = dict(
         avatar=lambda v, c, m, p: BaseMTView._list_thumbnail(
-            v, c, m, p, 'avatar'),
+            v, c, m, 'avatar'),
     )
     column_editable_list = ('need_review', 'remark')
 

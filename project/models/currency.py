@@ -46,6 +46,7 @@ class Currency(db.Model):
     icoproject = db.relationship('ICOProject', uselist=False, back_populates='currency')
     country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
     country = db.relationship('Country', back_populates='currencies')
+    coms = db.relationship('COM', back_populates='currency')
 
     def __repr__(self):
         return '{} ({})'.format(self.name, self.symbol)
@@ -98,25 +99,16 @@ class CurrencyView(BaseMTView):
     column_searchable_list = ('name', 'symbol')
     column_default_sort = ('id', True)
 
-    def _list_name(view, context, model, name):
-        if not model.alias:
-            return '{} ( {} )'.format(model.name,
-                                      model.symbol)
-        else:
-            return '{} ( {} ) / {}'.format(model.name,
-                                           model.symbol,
-                                           model.alias)
-
     def _list_infoed(view, context, model, name):
         return 'Y' if (model.twitter or model.facebook or model.slack or model.github) else 'N'
 
     column_formatters = dict(
-        name=_list_name,
-        website=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'website'),
-        ico=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'ico'),
+        name=lambda v, c, m, p: BaseMTView._currency_display(v, c, m ,p),
+        website=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, 'website'),
+        ico=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, 'ico'),
         info=_list_infoed,
-        wallet=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'wallet'),
-        description=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, p, 'description'),
+        wallet=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, 'wallet'),
+        description=lambda v, c, m, p: BaseMTView._list_has_value(v, c, m, 'description'),
         created_at=lambda v, c, m, p: arrow.get(m.created_at)
                                            .to('Asia/Shanghai')
                                            .format('YYYY-MM-DD HH:mm:ss'),

@@ -59,10 +59,10 @@ class SocialView(BaseMTView):
     column_default_sort = ('posted_at', True)
     column_formatters = dict(
         social_avatar=lambda v, c, m, p: BaseMTView._list_thumbnail(
-            v, c, m, p, 'social_avatar'),
-        content=lambda v, c, m, p: BaseMTView._list_html(v, c, m, p, 'content'),
+            v, c, m, 'social_avatar'),
+        content=lambda v, c, m, p: BaseMTView._list_html(v, c, m, 'content'),
         content_translation=lambda v, c, m, p: BaseMTView._list_html(
-            v, c, m, p, 'content_translation'),
+            v, c, m, 'content_translation'),
         posted_at=lambda v, c, m, p: arrow.get(m.posted_at)
                                           .to('Asia/Shanghai')
                                           .format('YYYY-MM-DD HH:mm:ss')

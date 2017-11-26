@@ -88,7 +88,7 @@ class NewsView(BaseMTView):
 
     column_formatters = dict(
         photo_abstract=lambda v, c, m, p: BaseMTView._list_thumbnail(
-            v, c, m, p, 'photo_abstract'),
+            v, c, m, 'photo_abstract'),
         tag=_get_tag,
         posted_at=lambda v, c, m, p: arrow.get(m.created_at)
                                           .to('Asia/Shanghai')

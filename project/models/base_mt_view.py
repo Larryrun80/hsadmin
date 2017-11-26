@@ -31,18 +31,28 @@ class BaseMTView(ModelView):
             model.created_at = arrow.now().timestamp
 
     @staticmethod
-    def _list_html(view, context, model, name, key):
-        return Markup(getattr(model, key))
+    def _currency_display(view, context, model, name):
+        if not model.alias:
+            return '{} ( {} )'.format(model.name,
+                                      model.symbol)
+        else:
+            return '{} ( {} ) / {}'.format(model.name,
+                                           model.symbol,
+                                           model.alias)
 
     @staticmethod
-    def _list_has_value(view, context, model, name, key):
-        return 'Y' if getattr(model, key) else 'N'
+    def _list_html(view, context, model, name):
+        return Markup(getattr(model, name))
 
     @staticmethod
-    def _list_thumbnail(view, context, model, name, key):
-        if not getattr(model, key):
+    def _list_has_value(view, context, model, name):
+        return 'Y' if getattr(model, name) else 'N'
+
+    @staticmethod
+    def _list_thumbnail(view, context, model, name):
+        if not getattr(model, name):
             return ''
 
         return Markup(
             '<img src="{}" style="width: 100px; height: 75px;">'.format(
-                getattr(model, key)))
+                getattr(model, name)))

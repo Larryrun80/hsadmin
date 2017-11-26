@@ -110,6 +110,6 @@ class ICORawView(BaseMTView):
                                                     .to('Asia/Shanghai')
                                                     .format('YYYY-MM-DD HH:mm:ss'),
         logo=lambda v, c, m, p: BaseMTView._list_thumbnail(
-            v, c, m, p, 'logo'),
+            v, c, m, 'logo'),
         info_source_url=lambda v, c, m, p: Markup('<a href="{}" target="_blank">source_url</a>'.format(m.info_source_url)),
     )

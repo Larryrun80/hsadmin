@@ -52,8 +52,8 @@ class ICOProject(db.Model):
     roadmap = db.Column(db.Text)
     roadmap_cn = db.Column(db.Text)
 
-    ico_started_at = db.Column(db.TIMESTAMP)
-    ico_ended_at = db.Column(db.TIMESTAMP)
+    ico_started_at = db.Column(db.DateTime)
+    ico_ended_at = db.Column(db.DateTime)
     ico_bounty = db.Column(db.Text)
     ico_bounty_cn = db.Column(db.Text)
     ico_distribution = db.Column(db.Text)
@@ -189,8 +189,6 @@ class ICOProjectView(BaseMTView):
         'currency_symbol',
         'logo',
         'brief_intro_cn',
-        'ico_started_at',
-        'ico_ended_at',
         'enabled',
         'created_at'
     )
@@ -214,7 +212,7 @@ class ICOProjectView(BaseMTView):
                                            .to('Asia/Shanghai')
                                            .format('YYYY-MM-DD HH:mm:ss'),
         logo=lambda v, c, m, p: BaseMTView._list_thumbnail(
-            v, c, m, p, 'logo'),
+            v, c, m, 'logo'),
         info_source_url=lambda v, c, m, p: Markup('<a href="{}" target="_blank">source_url</a>'.format(m.info_source_url)),
     )
 
