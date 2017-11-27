@@ -344,7 +344,7 @@ class TagView(BaseMTView):
     column_filters = ('weight', 'is_deleted')
     column_default_sort = ('id', False)
 
-    column_editable_list = ('name', 'name_cn', 'weight', 'is_deleted', 'enabled')
+    column_editable_list = ('name', 'name_cn', 'weight', 'is_deleted', )
 
 # class ProjectRateView(BaseMTView):
 #     can_create = True
