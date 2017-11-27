@@ -25,7 +25,7 @@ class ICOProject(db.Model):
     currency_symbol = db.Column(db.String(20))
     # currency_name = db.Column(db.String(50))
     currency_alias = db.Column(db.String(20))
-    logo = db.Column(db.String(1000))ICORating’s
+    logo = db.Column(db.String(1000))
     project_started_at = db.Column(db.TIMESTAMP)
     max_supply = db.Column(db.String(50))
     blockchain = db.Column(db.String(50))
