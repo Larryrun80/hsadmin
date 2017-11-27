@@ -251,7 +251,7 @@ class ICOProjectView(BaseMTView):
         'roadmap',
         'roadmap_cn',
         'ico_accepts',
-        'ico_started_at',
+        # 'ico_started_at',
         'ico_price',
         'ico_bounty',
         'ico_bounty_cn',
