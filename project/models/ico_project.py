@@ -25,7 +25,7 @@ class ICOProject(db.Model):
     currency_symbol = db.Column(db.String(20))
     # currency_name = db.Column(db.String(50))
     currency_alias = db.Column(db.String(20))
-    logo = db.Column(db.String(1000))
+    logo = db.Column(db.String(1000))ICORating’s
     project_started_at = db.Column(db.TIMESTAMP)
     max_supply = db.Column(db.String(50))
     blockchain = db.Column(db.String(50))
@@ -52,6 +52,7 @@ class ICOProject(db.Model):
     roadmap = db.Column(db.Text)
     roadmap_cn = db.Column(db.Text)
 
+    ico_accepts = db.Column(db.String(100))
     ico_started_at = db.Column(db.DateTime)
     ico_ended_at = db.Column(db.DateTime)
     ico_price = db.Column(db.Text)
@@ -189,6 +190,8 @@ class ICOProjectView(BaseMTView):
     column_list = (
         'name',
         'currency_symbol',
+        'ico_started_at',
+        'ico_ended_at',
         'logo',
         'brief_intro_cn',
         'enabled',
@@ -200,7 +203,7 @@ class ICOProjectView(BaseMTView):
     column_filters = ('ico_started_at', 'ico_ended_at', 'enabled')
     column_default_sort = ('id', False)
 
-    column_editable_list = ('name', 'currency_symbol', 'brief_intro_cn', 'ico_started_at', 'ico_ended_at')
+    column_editable_list = ('name', 'currency_symbol', 'brief_intro_cn',)
 
     column_formatters = dict(
         brief_intro_cn=lambda v, c, m, p: m.brief_intro if not m.brief_intro_cn else '{} | {}'.format(m.brief_intro_cn, m.brief_intro),
@@ -247,6 +250,8 @@ class ICOProjectView(BaseMTView):
         'features_cn',
         'roadmap',
         'roadmap_cn',
+        'ico_accepts',
+        'ico_started_at',
         'ico_price',
         'ico_bounty',
         'ico_bounty_cn',
