@@ -53,6 +53,7 @@ class ICOProject(db.Model):
     roadmap_cn = db.Column(db.Text)
 
     ico_accepts = db.Column(db.String(100))
+    ico_hardcap = db.Column(db.String(50))
     ico_started_at = db.Column(db.DateTime)
     ico_ended_at = db.Column(db.DateTime)
     ico_price = db.Column(db.Text)
