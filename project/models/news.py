@@ -75,6 +75,7 @@ class NewsView(BaseMTView):
         'tag': [
             ('news', '教程'),
             ('new_currency', '每日上新'),
+            ('token_talk', '币聊')
         ]
     }
 
