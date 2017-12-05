@@ -206,6 +206,13 @@ class ICOProjectView(BaseMTView):
 
     column_editable_list = ('name', 'currency_symbol', 'brief_intro_cn',)
 
+    def on_model_change(self, form, model, is_created):
+        model.updated_at = arrow.now().timestamp
+
+        if is_created:
+            model.is_deleted = 0
+            model.created_at = arrow.now().timestamp
+
     column_formatters = dict(
         brief_intro_cn=lambda v, c, m, p: m.brief_intro if not m.brief_intro_cn else '{} | {}'.format(m.brief_intro_cn, m.brief_intro),
         ico_started_at=lambda v, c, m, p: arrow.get(m.ico_started_at)
