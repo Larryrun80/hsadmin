@@ -11,6 +11,7 @@ class Announcement(db.Model):
     link = db.Column(db.String(255))
     is_deleted = db.Column(db.Boolean)
     review_status = db.Column(db.Boolean)
+    end_time = db.Column(db.TIMESTAMP)
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
 
@@ -24,6 +25,7 @@ class AnnouncementView(BaseMTView):
         link='链接',
         is_deleted='隐藏',
         review_status='审核状态',
+        end_time='结束时间',
         created_at='创建时间',
         updated_at='修改时间'
     )
@@ -35,11 +37,12 @@ class AnnouncementView(BaseMTView):
         'link',
         'is_deleted',
         'review_status',
+        'end_time',
         'created_at',
         'updated_at'
     )
 
-    column_sortable_list = ('created_at',)
+    column_sortable_list = ('created_at', 'end_time')
     column_searchable_list = ('content',)
     column_default_sort = ('id', True)
 
@@ -50,4 +53,5 @@ class AnnouncementView(BaseMTView):
         'link',
         'is_deleted',
         'review_status',
+        'end_time',
     )
