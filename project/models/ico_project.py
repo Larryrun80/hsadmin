@@ -210,7 +210,8 @@ class ICOProjectView(BaseMTView):
         model.updated_at = arrow.now().timestamp
 
         if is_created:
-            model.is_deleted = 1
+            model.is_deleted = 0
+            model.enabled = 0
             model.created_at = arrow.now().timestamp
 
     column_formatters = dict(
