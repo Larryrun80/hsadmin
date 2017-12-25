@@ -1,3 +1,5 @@
+import arrow
+
 from .. import db
 from .base_mt_view import BaseMTView
 
@@ -55,3 +57,11 @@ class AnnouncementView(BaseMTView):
         'review_status',
         'end_time',
     )
+
+    def on_model_change(self, form, model, is_created):
+        model.is_deleted = arrow.get(model.is_deleted).timestamp
+        # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
+        model.updated_at = arrow.now().timestamp
+
+        if is_created:
+            model.created_at = arrow.now().timestamp

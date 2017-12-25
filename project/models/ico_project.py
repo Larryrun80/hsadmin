@@ -207,6 +207,8 @@ class ICOProjectView(BaseMTView):
     column_editable_list = ('name', 'currency_symbol', 'brief_intro_cn',)
 
     def on_model_change(self, form, model, is_created):
+        # model.ico_started_at = arrow.get(model.ico_started_at).timestamp
+        # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
         model.updated_at = arrow.now().timestamp
 
         if is_created:
@@ -262,6 +264,7 @@ class ICOProjectView(BaseMTView):
         'ico_accepts',
         'ico_hardcap',
         # 'ico_started_at',
+        # 'ico_ended_at',
         'ico_price',
         'ico_bounty',
         'ico_bounty_cn',
