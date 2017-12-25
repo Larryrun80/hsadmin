@@ -22,9 +22,8 @@ class AnnouncementView(BaseMTView):
     can_create = True
     can_edit = True
 
-
     def on_model_change(self, form, model, is_created):
-        model.is_deleted = arrow.get(model.is_deleted).timestamp
+        model.end_time = arrow.get(model.is_deleted).timestamp
         # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
         model.updated_at = arrow.now().timestamp
 
