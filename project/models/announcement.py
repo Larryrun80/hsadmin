@@ -22,6 +22,15 @@ class AnnouncementView(BaseMTView):
     can_create = True
     can_edit = True
 
+
+    def on_model_change(self, form, model, is_created):
+        model.is_deleted = arrow.get(model.is_deleted).timestamp
+        # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
+        model.updated_at = arrow.now().timestamp
+
+        if is_created:
+            model.created_at = arrow.now().timestamp
+
     column_labels = dict(
         content='内容',
         link='链接',
@@ -57,11 +66,3 @@ class AnnouncementView(BaseMTView):
         'review_status',
         'end_time',
     )
-
-    def on_model_change(self, form, model, is_created):
-        model.is_deleted = arrow.get(model.is_deleted).timestamp
-        # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
-        model.updated_at = arrow.now().timestamp
-
-        if is_created:
-            model.created_at = arrow.now().timestamp
