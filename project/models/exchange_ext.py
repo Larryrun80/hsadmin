@@ -13,6 +13,10 @@ class ExchangeExt(db.Model):
 
     # Columns
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    alias = db.Column(db.String(50))
+    logo = db.Column(db.String(255))
+    website = db.Column(db.String(255))
     description = db.Column(db.TEXT)
     description_cn = db.Column(db.TEXT)
     twitter = db.Column(db.String(255))
@@ -85,6 +89,10 @@ class ExchangeExtView(BaseMTView):
 
     form_columns = (
         'market',
+        'name',
+        'alias',
+        'logo',
+        'website',
         'tags',
         'description',
         'description_cn',
