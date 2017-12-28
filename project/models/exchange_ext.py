@@ -63,8 +63,8 @@ class ExchangeExtView(BaseMTView):
     can_create = True
     can_edit = True
 
-    column_labels = dict(description='项目介绍（英文）',
-                         description_cn="项目介绍（中文）",
+    column_labels = dict(description='交易所介绍（英文）',
+                         description_cn="交易所介绍（中文）",
                          app_download='APP 下载信息',
                          fee='交易/提现费率',
                          enabled='是否有效',
