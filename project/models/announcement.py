@@ -22,8 +22,8 @@ class AnnouncementView(BaseMTView):
     can_create = True
     can_edit = True
 
-    def on_model_change(self, form, model, is_created=None):
-        model.end_time = arrow.get(model.is_deleted).timestamp
+    def on_model_change(self, form, model, is_created):
+        model.end_time = arrow.get(model.end_time).timestamp
         # model.ico_ended_at = arrow.get(model.ico_ended_at).timestamp
         model.updated_at = arrow.now().timestamp
 
@@ -64,4 +64,16 @@ class AnnouncementView(BaseMTView):
         'is_deleted',
         'review_status',
         'end_time',
+    )
+
+    column_formatters = dict(
+        end_time=lambda v, c, m, p: arrow.get(m.end_time)
+                                           .to('Asia/Shanghai')
+                                           .format('YYYY-MM-DD HH:mm:ss'),
+        created_at=lambda v, c, m, p: arrow.get(m.created_at)
+                                           .to('Asia/Shanghai')
+                                           .format('YYYY-MM-DD HH:mm:ss'),
+        updated_at=lambda v, c, m, p: arrow.get(m.updated_at)
+                                           .to('Asia/Shanghai')
+                                           .format('YYYY-MM-DD HH:mm:ss'),
     )

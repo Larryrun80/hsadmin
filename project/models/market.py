@@ -20,6 +20,9 @@ class Market(db.Model):
     country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
     country = db.relationship('Country', back_populates='markets')
     coms = db.relationship('COM', back_populates='market')
+    announcements = db.relationship('ExchangeAnnouncement', back_populates='exchange')
+    exchange_ext = db.relationship('ExchangeExt', uselist=False, back_populates='market')
+
 
     top_market = db.relationship(
         'TopMarket',
