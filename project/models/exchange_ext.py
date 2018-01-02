@@ -1,6 +1,7 @@
 from .. import db
 from .base_mt_view import BaseMTView
 from .market import Market
+from .country import Country
 from .editor import CKTextAreaField
 
 exchanges_tags_table = db.Table('exchanges_tags', db.Model.metadata,
@@ -40,8 +41,8 @@ class ExchangeExt(db.Model):
                             autoincrement=True)
     market = db.relationship('Market', back_populates='exchange_ext')
 
-    # country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
-    # country = db.relationship('Country', back_populates='markets')
+    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    country = db.relationship('Country', back_populates='exchanges')
 
     tags = db.relationship('ExchangeTag', secondary=exchanges_tags_table)
 
@@ -70,6 +71,7 @@ class ExchangeExtView(BaseMTView):
     column_labels = dict(description='交易所介绍（英文）',
                          description_cn="交易所介绍（中文）",
                          app_download='APP 下载信息',
+                         country='国家',
                          fee='交易/提现费率',
                          enabled='是否有效',
                          is_deleted='删除',
@@ -78,6 +80,7 @@ class ExchangeExtView(BaseMTView):
 
     column_list = (
         'market',
+        'country',
         'enabled',
         'created_at',
         'updated_at'
@@ -91,6 +94,7 @@ class ExchangeExtView(BaseMTView):
         'market',
         'name',
         'alias',
+        'country',
         'logo',
         'website',
         'tags',
@@ -126,6 +130,9 @@ class ExchangeExtView(BaseMTView):
     form_ajax_refs = {
         'market': {
             'fields': (Market.name, )
+        },
+        'country': {
+            'fields': (Country.short_name, Country.alpha2_code, Country.alpha3_code, Country.numeric_code)
         },
         'tags': {
             'fields': (ExchangeTag.name, ExchangeTag.name_cn)

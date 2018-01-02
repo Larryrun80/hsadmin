@@ -17,8 +17,8 @@ class Market(db.Model):
     created_at = db.Column(db.TIMESTAMP)
     updated_at = db.Column(db.TIMESTAMP)
 
-    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
-    country = db.relationship('Country', back_populates='markets')
+    # country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    # country = db.relationship('Country', back_populates='markets')
     coms = db.relationship('COM', back_populates='market')
     announcements = db.relationship('ExchangeAnnouncement', back_populates='exchange')
     exchange_ext = db.relationship('ExchangeExt', uselist=False, back_populates='market')
@@ -41,7 +41,7 @@ class MarketView(BaseMTView):
     column_labels = dict(
         name='市场名',
         alias='别名',
-        country='国家',
+        # country='国家',
         website='官网',
         synchronized='可搜索',
         weight='权重',
@@ -56,7 +56,7 @@ class MarketView(BaseMTView):
 
     column_list = (
         'name',
-        'country',
+        # 'country',
         'alias',
         'top_market',
         'synchronized',
@@ -71,4 +71,4 @@ class MarketView(BaseMTView):
     column_searchable_list = ('name',)
     column_default_sort = ('id', True)
 
-    column_editable_list = ('alias', 'weight', 'country', 'enabled', 'top_market')
+    column_editable_list = ('alias', 'weight', 'enabled', 'top_market')
