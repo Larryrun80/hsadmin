@@ -153,9 +153,20 @@ def internal_error(error):
 # ###################
 if not app.debug:
     import logging
-    # we use log file to log errors here
-    # you can also implement mail notification
-    # see logging.handlers.SMTPHandler
+    from logging.handlers import SMTPHandler
+    credentials = None
+    if app.config['MAIL_USERNAME'] and app.config['MAIL_PASSWORD']:
+        credentials = (app.config['MAIL_USERNAME'],
+                       app.config['MAIL_PASSWORD'])
+    mail_handler = SMTPHandler((app.config['MAIL_SERVER'],
+                                app.config['MAIL_PORT']),
+                               app.config['MAIL_DEFAULT_SENDER'],
+                               app.config['ADMIN_MAIL'],
+                               'iqg stats failure',
+                               credentials)
+    mail_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(mail_handler)
+
     from logging.handlers import TimedRotatingFileHandler
     log_file = '{dir}/{file}'.format(dir=app.basedir,
                                      file=app.config['ERROR_LOG'])
@@ -170,4 +181,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
-    app.logger.info('Project start up...')
+    app.logger.info('hsadmin startup')
