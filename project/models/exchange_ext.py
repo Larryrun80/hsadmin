@@ -131,9 +131,9 @@ class ExchangeExtView(BaseMTView):
         'market': {
             'fields': (Market.name, )
         },
-        'country': {
-            'fields': (Country.short_name, Country.alpha2_code, Country.alpha3_code, Country.numeric_code)
-        },
+        # 'country': {
+        #     'fields': (Country.short_name, Country.alpha2_code, Country.alpha3_code, Country.numeric_code)
+        # },
         'tags': {
             'fields': (ExchangeTag.name, ExchangeTag.name_cn)
         }

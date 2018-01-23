@@ -16,7 +16,7 @@ class Country(db.Model):
 
     currencies = db.relationship('Currency', back_populates='country')
     icoprojects = db.relationship('ICOProject', back_populates='country')
-    exchanges = db.relationship('ExchangeExt', back_populates='country')
+    markets = db.relationship('Market', back_populates='country')
 
     def __repr__(self):
         return self.short_name
