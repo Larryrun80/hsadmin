@@ -41,8 +41,8 @@ class ExchangeExt(db.Model):
                             autoincrement=True)
     market = db.relationship('Market', back_populates='exchange_ext')
 
-    country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
-    country = db.relationship('Country', back_populates='exchanges')
+    # country_id = db.Column(db.Integer, db.ForeignKey('country.id'))
+    # country = db.relationship('Country', back_populates='exchanges')
 
     tags = db.relationship('ExchangeTag', secondary=exchanges_tags_table)
 
@@ -80,7 +80,7 @@ class ExchangeExtView(BaseMTView):
 
     column_list = (
         'market',
-        'country',
+        # 'country',
         'enabled',
         'created_at',
         'updated_at'
@@ -94,7 +94,7 @@ class ExchangeExtView(BaseMTView):
         'market',
         'name',
         'alias',
-        'country',
+        # 'country',
         'logo',
         'website',
         'tags',
