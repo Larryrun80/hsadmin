@@ -71,7 +71,7 @@ class MarketView(BaseMTView):
     column_searchable_list = ('name',)
     column_default_sort = ('id', True)
 
-    column_editable_list = ('alias', 'weight', 'enabled', 'top_market')
+    column_editable_list = ('alias', 'country', 'weight', 'enabled', 'top_market')
 
     form_ajax_refs = {
         'country': {
