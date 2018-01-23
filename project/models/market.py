@@ -73,8 +73,8 @@ class MarketView(BaseMTView):
 
     column_editable_list = ('alias', 'country', 'weight', 'enabled', 'top_market')
 
-    form_ajax_refs = {
-        'country': {
-            'fields': (Country.short_name, Country.alpha2_code, Country.alpha3_code, Country.numeric_code)
-        },
-    }
+    # form_ajax_refs = {
+    #     'country': {
+    #         'fields': (Country.short_name, Country.alpha2_code, Country.alpha3_code, Country.numeric_code)
+    #     },
+    # }
